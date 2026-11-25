@@ -1,0 +1,720 @@
+<!doctype html>
+<!--
+  CONCEITO FRATTA TRANSFER (base das prévias de transfer, estrutura do site do Neto)
+  Pra fazer a prévia de um lead, trocar:
+  1. "Transfer Patacho" pelo nome da empresa (title, metas, textos, rodapé)
+  2. logo.png (clara, vai sobre a capa) e logo-escura.png (menu branco), PNG sem fundo
+  3. --laranja / --brasa / --azul / --tinta no :root pelas cores da logo
+  4. WhatsApp: 5582998424211 (const WA, botão flutuante e rodapé) e o e-mail
+  5. Fotos do cliente: quem somos (transfer-van.jpg), serviços (chegada-familia.jpg e aeroporto.jpg)
+  6. Números do "Quem somos" (nota no Google, anos, 24h) e o endereço/base no rodapé
+  7. og.jpg: print do topo do site em 1200x630 (capa do link no WhatsApp)
+  Ao mandar o link no WhatsApp, usar /?site no final pra capa aparecer.
+-->
+
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Transfer Patacho · Transfer e táxi em Porto de Pedras e São Miguel dos Milagres</title>
+<meta name="description" content="Transfer privativo do aeroporto de Maceió ou Recife pra sua pousada no Patacho, Milagres, Japaratinga e Maragogi. Táxi e passeios na Rota Ecológica.">
+<meta property="og:title" content="Transfer Patacho">
+<meta property="og:description" content="Transfer do aeroporto de Maceió ou Recife direto pra sua pousada no Patacho e na Rota Ecológica dos Milagres.">
+<meta property="og:url" content="https://transfer-patacho.vercel.app/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Transfer Patacho">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:image" content="https://transfer-patacho.vercel.app/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Transfer Patacho no Aeroporto Zumbi dos Palmares">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://transfer-patacho.vercel.app/og.jpg">
+<link rel="icon" href="favicon.png">
+<link rel="preload" href="capa.jpg" as="image" media="(min-width:0px)">
+<link rel="preload" href="barlowc-800.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="barlow-400.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:"BC";src:url(barlowc-600.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"BC";src:url(barlowc-700.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"BC";src:url(barlowc-800.woff2) format("woff2");font-weight:800;font-display:swap}
+@font-face{font-family:"BW";src:url(barlow-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"BW";src:url(barlow-500.woff2) format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"BW";src:url(barlow-600.woff2) format("woff2");font-weight:600;font-display:swap}
+@font-face{font-family:"BW";src:url(barlow-700.woff2) format("woff2");font-weight:700;font-display:swap}
+:root{--azul:#1c1d22;--noite:#141519;--laranja:#1d6fd6;--brasa:#c8202a;--papel:#f7f5f1;--linha:#dcd8d0;--tinta:#16171b;--muted:#5a6173}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:"BW",system-ui,sans-serif;font-size:18px;line-height:1.6;color:var(--tinta);background:var(--papel);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{font-family:"BC",sans-serif;font-weight:800;text-transform:uppercase;line-height:.92;letter-spacing:-.005em}
+.wrap{max-width:1320px;margin:0 auto;padding:0 clamp(20px,4vw,56px)}
+.k{display:block;font-weight:700;font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--brasa)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;border-radius:0;border:0;cursor:pointer;font-family:"BW";font-weight:700;font-size:14px;letter-spacing:.14em;text-transform:uppercase;padding:19px 30px;background:var(--laranja);color:#fff;transition:background .25s,color .25s;white-space:nowrap}
+.btn:hover{background:var(--brasa)}
+.btn svg{width:20px;height:20px;flex:none}
+.btn.lin{background:transparent;color:#fff;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.85)}
+.btn.lin:hover{background:#fff;color:var(--tinta)}
+.hero .bts{display:flex;gap:12px;flex-wrap:wrap}
+.split .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.04em}
+.split .w>span{display:inline-block;transform-origin:0 100%}
+.tit{text-align:center;max-width:860px;margin:0 auto}
+.tit h2{font-size:clamp(52px,6vw,96px);color:var(--noite);margin-top:14px}
+.tit h2 em{font-style:normal;color:var(--azul)}
+.tit p{color:var(--muted);max-width:46ch;margin:18px auto 0}
+
+/* NAV */
+#nav{position:fixed;inset:0 0 auto 0;z-index:60;padding:18px 0;transition:background .4s,padding .4s}
+#nav .wrap{display:flex;align-items:center;gap:34px}
+#nav .lg img{height:58px;width:auto;filter:drop-shadow(0 3px 10px rgba(0,0,0,.45));transition:height .4s}#nav .lg .lg-d{display:none}#nav.solid .lg .lg-l{display:none}#nav.solid .lg .lg-d{display:block}
+#nav nav{display:flex;gap:32px;margin-left:auto;font-weight:600;font-size:15px;letter-spacing:.06em;text-transform:uppercase;color:#fff}
+#nav nav a{opacity:.9}#nav nav a:hover{opacity:1}
+#nav .btn{padding:14px 22px;font-size:13px}
+#nav.solid{background:#fff;padding:8px 0;box-shadow:0 1px 0 var(--linha)}
+#nav.solid nav{color:var(--tinta)}
+#nav.solid .lg img{height:46px;filter:none}
+
+.lgt{display:flex;flex-direction:column;font-family:"BC";font-weight:700;font-size:15px;letter-spacing:.32em;text-transform:uppercase;line-height:1;color:#fff;text-shadow:0 2px 12px rgba(0,0,0,.35)}.lgt b{font-weight:800;font-size:34px;letter-spacing:.02em;margin-top:2px}#nav.solid .lgt{color:var(--tinta);text-shadow:none}#nav.solid .lgt b{color:var(--laranja)}footer .lgt{margin-bottom:14px;text-shadow:none}footer .lgt b{color:#fff}
+@media(max-width:900px){.lgt{font-size:11px}.lgt b{font-size:26px}}
+/* CAPA */
+.hero{position:relative;height:100vh;height:100svh;min-height:600px;color:#fff;overflow:hidden;background:var(--noite)}
+.hero picture,.hero .bg{position:absolute;inset:0;width:100%;height:100%}
+.hero .bg{object-fit:cover;object-position:50% 50%}
+.hero::after{content:"";position:absolute;inset:auto 0 0 0;height:55%;background:linear-gradient(0deg,rgba(10,12,16,.7),rgba(10,12,16,0));pointer-events:none}
+.hero .sombra{position:absolute;inset:0;background:#0a0c10;opacity:0;z-index:3;pointer-events:none}
+.hero .wrap{position:absolute;left:0;right:0;bottom:clamp(44px,8vh,90px);z-index:2;display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
+.hero h1{font-size:clamp(60px,min(8.6vw,14vh),150px);max-width:9.5ch;text-shadow:0 4px 40px rgba(10,12,16,.35)}
+.hero h1 em{font-style:normal;color:var(--laranja)}
+.bora{display:flex;align-items:center;gap:10px;margin-top:20px;font-size:clamp(17px,1.4vw,20px);font-weight:500;white-space:nowrap}
+.bora .slot{position:relative;display:inline-block;height:1.7em;overflow:hidden;min-width:6.5em}
+.bora .slot b{position:absolute;left:0;top:0;white-space:nowrap;color:#fff;line-height:1.7em;font-weight:700}
+.hero .lado{display:flex;flex-direction:column;align-items:flex-start;gap:16px;padding-bottom:12px}
+.g5{display:flex;align-items:center;gap:10px;font-size:15px;font-weight:500}
+.g5 svg{width:24px;height:24px;background:#fff;padding:3px}
+.g5 b{font-weight:700}
+
+/* ESTRELAS BRILHANDO */
+.est{display:inline-flex;gap:2px;color:#ffc21a}
+.est i{font-style:normal;display:inline-block;text-shadow:0 0 0 rgba(255,194,26,0)}
+
+/* NETO */
+.quem{position:relative;z-index:5;will-change:clip-path;background:var(--papel);padding:clamp(110px,12vw,180px) 0}
+.quem .wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(40px,6vw,100px);align-items:center}
+.sol{position:relative;aspect-ratio:1/1.1;max-width:540px;width:100%;justify-self:center}
+.sol .disco{position:absolute;left:-4%;top:8%;width:82%;aspect-ratio:1;border-radius:50%;background:var(--laranja)}
+.sol .foto{position:absolute;right:0;top:0;width:76%;height:100%;overflow:hidden}
+.sol .foto img{width:100%;height:100%;object-fit:cover;object-position:28% 30%}
+.sol .tag{position:absolute;left:0;bottom:7%;background:var(--noite);color:#fff;padding:14px 20px;font-weight:700;font-size:15px;letter-spacing:.06em;text-transform:uppercase;line-height:1.3}
+.sol .tag small{display:block;font-weight:500;letter-spacing:0;text-transform:none;opacity:.8;font-size:14px}
+.quem h2{font-size:clamp(54px,6vw,100px);color:var(--noite);margin:16px 0 24px}
+.quem h2 em{font-style:normal;color:var(--azul)}
+.quem p{color:var(--muted);max-width:50ch}
+.quem p+p{margin-top:14px}
+.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}
+.num{background:#fff;padding:20px 18px 18px;border-top:3px solid var(--azul)}
+.num .ic{height:28px;display:flex;align-items:center;margin-bottom:12px}
+.num .ic svg{width:28px;height:28px}
+.num .ic .est{font-size:21px}
+.num b{display:block;font-family:"BC";font-weight:800;font-size:clamp(46px,4.2vw,62px);line-height:1;color:var(--noite)}
+.num>span{display:block;font-size:15px;color:var(--muted);line-height:1.35;margin-top:6px}
+.num.wa{border-top-color:#25d366}.num.wa .ic svg{color:#25d366}
+.num.gg{border-top-color:#ffc21a}
+
+/* PASSEIOS: palco preso com 4 destaques que cobrem um ao outro rápido + grade com todos */
+.dest{position:relative;z-index:6;background:#fff}
+.dest-t{padding:clamp(110px,11vw,170px) 0 clamp(56px,6vw,90px)}
+.palco{position:relative;height:100vh;height:100svh;min-height:540px;overflow:hidden;background:var(--noite);color:#fff}
+.camada{position:absolute;inset:0;z-index:1;display:flex;align-items:flex-end;will-change:clip-path}
+.camada picture,.camada img{position:absolute;inset:0;width:100%;height:100%}
+.camada img{object-fit:cover}
+.camada::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,12,16,.72) 0%,rgba(10,12,16,.2) 45%,rgba(10,12,16,0) 100%)}
+.camada .esc{position:absolute;inset:0;z-index:3;background:#000;opacity:0;pointer-events:none}
+.camada .wrap{position:relative;z-index:2;width:100%;padding-bottom:clamp(50px,9vh,100px);display:flex;align-items:flex-end;justify-content:space-between;gap:40px}
+.camada .n{font-family:"BC";font-weight:700;font-size:18px;letter-spacing:.1em;opacity:.9}
+.camada small{display:block;font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:#ffc477;margin-top:8px}
+.camada h3{font-size:clamp(64px,9vw,150px);margin-top:10px;text-shadow:0 4px 30px rgba(0,0,0,.3)}
+.camada .lado{max-width:380px;padding-bottom:10px}
+.camada p{font-size:18px;font-weight:500;margin-bottom:22px;text-shadow:0 2px 14px rgba(0,0,0,.45)}
+.todos{padding:clamp(80px,8vw,120px) 0 clamp(110px,11vw,160px)}
+.todos-h{display:flex;justify-content:space-between;align-items:flex-end;gap:30px}
+.todos-h h3{font-size:clamp(40px,4vw,64px);color:var(--noite);margin-top:12px}
+.todos-h h3 em{font-style:normal;color:var(--azul)}
+.todos-h p{color:var(--muted);max-width:40ch}
+.pgrid,.rgrid{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:minmax(clamp(170px,15vw,240px),auto);grid-auto-flow:dense;gap:clamp(10px,1.2vw,18px);margin-top:clamp(36px,4vw,56px)}
+.pgrid .g,.rgrid .g{grid-column:span 2;grid-row:span 2}
+.pgrid .t,.rgrid .t{grid-row:span 2}
+.pgrid .w,.rgrid .w{grid-column:span 2}
+.rgrid .f{grid-column:1/-1}
+.g b{font-size:clamp(40px,3.8vw,64px)!important}
+.pcard{position:relative;overflow:hidden;background:var(--noite);color:#fff;display:flex;flex-direction:column;justify-content:flex-end;padding:18px 16px;cursor:pointer}
+.pcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pcard::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,12,16,.9) 0%,rgba(10,12,16,.45) 40%,rgba(10,12,16,0) 70%)}
+.pcard>span{position:relative;z-index:2;display:block}
+.pcard small{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#ffc477}
+.pcard b{display:block;font-family:"BC";font-weight:800;text-transform:uppercase;font-size:clamp(24px,2vw,32px);line-height:.95;margin-top:5px}
+.pcard em{display:inline-block;font-style:normal;font-size:11.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-top:12px;padding-bottom:3px;border-bottom:1.5px solid var(--laranja)}
+.pcard.cta{background:var(--laranja);justify-content:center}
+.pcard.cta::after{display:none}
+.pcard.cta small{color:#fff}
+.pcard.cta em{border-color:#fff}
+.pcard.cta p{position:relative;z-index:2;font-size:15px;line-height:1.45;margin-top:10px}
+
+/* DIA (linha do tempo) */
+.dia{position:relative;z-index:7;background:var(--papel);padding:clamp(110px,12vw,180px) 0;border-radius:44px 44px 0 0;margin-top:-44px}
+.dia .tit{margin-bottom:clamp(60px,7vw,100px)}
+.linha{position:relative;max-width:1080px;margin:0 auto}
+.linha .eixo{position:absolute;left:50%;top:0;bottom:0;width:3px;margin-left:-1.5px;background:var(--linha)}
+.linha .eixo i{position:absolute;inset:0;background:var(--laranja);transform-origin:top;transform:scaleY(0)}
+.passo{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:clamp(50px,8vw,120px);align-items:center;margin-bottom:clamp(60px,7vw,100px)}
+.passo:last-child{margin-bottom:0}
+.passo .ponto{position:absolute;left:50%;top:50%;width:20px;height:20px;margin:-10px 0 0 -10px;background:var(--laranja);border:4px solid var(--papel);box-shadow:0 0 0 2px var(--laranja);z-index:2}
+.passo .img{overflow:hidden;aspect-ratio:4/3.2}
+.passo .img img{width:100%;height:100%;object-fit:cover}
+.passo .tx b{font-family:"BC";font-weight:800;font-size:64px;line-height:1;color:var(--laranja);display:block}
+.passo .tx h3{font-size:clamp(34px,3.2vw,48px);margin:8px 0 12px;color:var(--noite)}
+.passo .tx p{color:var(--muted);max-width:40ch}
+.passo:nth-child(odd of .passo) .img{order:2}
+.passo:nth-child(odd of .passo) .tx{text-align:right;justify-self:end}
+.passo:nth-child(odd of .passo) .tx p{margin-left:auto}
+
+/* DO QUE VOCÊ PRECISA */
+.pas{position:relative;background:#fff;padding:clamp(100px,11vw,160px) 0}
+.faixas{max-width:1080px;margin:clamp(56px,6vw,90px) auto 0;display:grid;gap:22px}
+.faixa{position:relative;height:clamp(220px,19vw,280px);overflow:hidden;display:flex;align-items:center;padding-left:9%;color:#fff;background:var(--noite)}
+.faixa img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.faixa::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,12,16,.82),rgba(10,12,16,.2));transition:background .4s}
+.faixa:hover::after{background:linear-gradient(90deg,rgba(10,12,16,.7),rgba(10,12,16,.1))}
+.faixa .mk{position:relative;z-index:2;max-width:60%}
+.faixa .mk small{font-size:13px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#ffc477}
+.faixa .mk b{display:block;font-family:"BC";font-weight:800;text-transform:uppercase;font-size:clamp(36px,3.6vw,54px);line-height:.95;margin:8px 0 10px}
+.faixa .mk em{display:block;font-style:normal;font-size:17px;font-weight:500;opacity:.95}
+.faixa .ir{position:absolute;z-index:2;right:22px;bottom:22px;padding:14px 20px;background:var(--laranja);color:#fff;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase}
+
+/* RESORTS */
+.rst{position:relative;background:#fff;padding:0 0 clamp(110px,11vw,170px)}
+.rgrid{margin-top:clamp(50px,5vw,80px)}
+.rcard{position:relative;overflow:hidden;background:var(--noite);color:#fff;display:flex;flex-direction:column;justify-content:flex-end;padding:22px 20px;cursor:pointer}
+.rcard img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rcard::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(10,12,16,.92) 0%,rgba(10,12,16,.5) 40%,rgba(10,12,16,0) 72%)}
+.rcard>span{position:relative;z-index:2;display:block}
+.rcard small{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#ffc477}
+.rcard b{display:block;font-family:"BC";font-weight:800;text-transform:uppercase;font-size:clamp(28px,2.4vw,36px);line-height:.95;margin-top:6px}
+.rcard em{display:inline-block;font-style:normal;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-top:14px;padding-bottom:3px;border-bottom:1.5px solid var(--laranja)}
+.rcard.cta{background:var(--laranja);justify-content:center;padding:28px clamp(22px,4vw,56px)}
+.rcard.cta b{font-size:clamp(32px,3vw,46px)}
+.rcard.cta::after{display:none}
+.rcard.cta p{position:relative;z-index:2;font-size:16px;line-height:1.5;opacity:.92;margin-top:12px}
+
+/* MONTE SEU ROTEIRO (modelo Agnaldo) */
+.res{position:relative;padding:clamp(100px,11vw,150px) 0;color:#fff;overflow:hidden;background:var(--noite)}
+.res-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 50%}
+.res::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(10,12,16,.94) 0%,rgba(10,12,16,.76) 36%,rgba(10,12,16,0) 64%)}
+.res .wrap{position:relative;z-index:2}
+.res-t{max-width:580px}
+.res-t .k{color:#ffb75a}
+.res-t h2{font-size:clamp(54px,6vw,100px);margin:14px 0 14px}
+.res-t>p{color:rgba(255,255,255,.88);margin-bottom:30px;max-width:44ch}
+.orc{display:grid;grid-template-columns:1fr 1fr;gap:16px 14px;background:#fff;color:var(--tinta);padding:28px}
+.orc .full{grid-column:1/-1}
+.orc [hidden]{display:none}
+.orc>*,.orc label,.orc .campo{min-width:0}
+.orc label,.orc .campo{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--noite)}
+.orc input,.orc select,.orc .dt{font:inherit;font-size:16px;font-weight:500;letter-spacing:0;text-transform:none;padding:13px 12px;border:1px solid #cfd3da;border-radius:0;background:#fff;color:var(--tinta);width:100%;text-align:left;-webkit-appearance:none;appearance:none}
+.orc select{background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%230b1d4f' stroke-width='2'/%3E%3C/svg%3E") no-repeat right 14px center;padding-right:36px}
+.orc .dt{cursor:pointer}
+.orc .dt.vazio{color:#8a909c}
+.orc input:focus,.orc select:focus,.orc .dt:focus{outline:2px solid var(--azul);outline-offset:-1px}
+.orc .dica{font-style:normal;font-size:12.5px;font-weight:500;letter-spacing:0;text-transform:none;color:var(--muted)}
+.orc .err{font-size:12.5px;font-weight:600;letter-spacing:0;text-transform:none;color:#c92a2a}
+.orc .err:empty{display:none}
+.orc .inv input,.orc .inv select,.orc .inv .dt{border-color:#c92a2a}
+.orc .btn{margin-top:4px;width:100%}
+.orc small{font-size:13.5px;color:var(--muted);text-align:center}
+.cal-bg{position:fixed;inset:0;z-index:90;background:rgba(10,12,16,.6);display:flex;align-items:center;justify-content:center;padding:20px}
+.cal-bg[hidden]{display:none}
+.cal{background:#fff;color:var(--tinta);width:100%;max-width:360px;padding:18px 16px 14px;box-shadow:0 24px 70px rgba(0,0,0,.35)}
+.cal-t{margin:0 0 10px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);text-align:center}
+.cal-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.cal-h b{font-size:17px;font-weight:700}
+.cal-h button{width:42px;height:42px;border:1px solid #cfd3da;background:#fff;font-size:22px;line-height:1;cursor:pointer;color:var(--tinta)}
+.cal-h button:disabled{opacity:.25;cursor:default}
+.cal-w,.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}
+.cal-w span{font-size:12px;font-weight:700;color:var(--muted);padding:4px 0}
+.cal-g button{aspect-ratio:1;border:0;background:#f1f2f5;font:inherit;font-size:15px;font-weight:600;color:var(--tinta);cursor:pointer}
+.cal-g button:hover:not(:disabled){background:#fde7cc}
+.cal-g button:disabled{background:none;color:#c3c7ce;text-decoration:line-through;cursor:not-allowed}
+.cal-g button.hj{box-shadow:inset 0 0 0 2px var(--laranja)}
+.cal-g button.meio{background:#fde7cc}
+.cal-g button.ida,.cal-g button.volta{background:var(--azul);color:#fff}
+.cal-f{display:flex;gap:8px;justify-content:flex-end;margin-top:12px}
+.cal-f button{font:inherit;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:11px 16px;border:1px solid #cfd3da;background:#fff;color:var(--tinta);cursor:pointer}
+.cal-f .cal-so{margin-right:auto}
+html.cal-on{overflow:hidden}
+
+/* AVALIAÇÕES */
+.aval{position:relative;z-index:2;background:#fff;padding:clamp(110px,12vw,170px) 0;border-radius:44px 44px 0 0;margin-top:-44px}
+.aval-h{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;margin-bottom:clamp(44px,5vw,70px)}
+.aval h2{font-size:clamp(50px,5.6vw,92px);color:var(--noite);margin-top:14px;max-width:11ch}
+.nota{display:flex;align-items:center;gap:16px;padding:18px 0;border-top:1.5px solid var(--linha);border-bottom:1.5px solid var(--linha)}
+.nota svg{width:40px;height:40px}
+.nota b{font-family:"BC";font-weight:800;font-size:58px;line-height:1;color:var(--noite)}
+.nota small{display:block;color:var(--muted);font-size:14.5px;line-height:1.35}
+.mural{columns:3;column-gap:20px}
+.mural>*{break-inside:avoid;margin-bottom:20px}
+.dep{background:var(--papel);padding:28px 26px 24px}
+.dep-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.dep-top svg{width:20px;height:20px}
+.dep p{font-size:17px;line-height:1.6;margin-bottom:20px}
+.dep .quem-av{display:flex;align-items:center;gap:12px}
+.dep .av{width:40px;height:40px;display:grid;place-items:center;color:#fff;font-weight:700;font-size:16px}
+.dep .quem-av b{display:block;font-size:16px;line-height:1.2}
+.dep .quem-av small{color:var(--muted);font-size:13.5px}
+.mfoto{position:relative}
+.mfoto img{width:100%}
+.mfoto figcaption{position:absolute;left:0;bottom:0;background:var(--noite);color:#fff;padding:8px 14px;font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+
+.loc{position:relative;z-index:2;background:var(--papel);padding:clamp(100px,10vw,140px) 0}
+.mapa{position:relative;height:clamp(340px,36vw,480px);margin-top:clamp(36px,4vw,54px);background:#e8e4dc}
+.mapa iframe{position:absolute;inset:0;width:100%;height:100%;border:0;filter:grayscale(.2)}
+.loc-b{display:flex;justify-content:center;margin-top:24px}
+/* FINAL + RODAPÉ sobre a foto */
+.final{position:relative;color:#fff;overflow:hidden;background:var(--noite)}
+.final .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 50%}
+.final::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(10,12,16,.15) 0%,rgba(10,12,16,.3) 40%,rgba(10,12,16,.92) 78%)}
+.final .wrap{position:relative;z-index:2}
+.final .cta{min-height:88vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:140px 0 60px}
+.final .k{color:#ffb75a}
+.final h2{font-size:clamp(64px,9vw,160px);max-width:9ch;margin:16px 0 22px;text-shadow:0 4px 30px rgba(0,0,0,.25)}
+.final h2 em{font-style:normal;color:var(--laranja)}
+.final .cta p{font-size:20px;max-width:40ch;margin-bottom:34px}
+footer{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:40px;padding:56px 0 34px;border-top:1px solid rgba(255,255,255,.25);font-size:15.5px;color:rgba(255,255,255,.85)}
+footer img{height:64px;width:auto;margin-bottom:16px}
+footer h4{font-family:"BC";font-weight:700;font-size:20px;letter-spacing:.06em;text-transform:uppercase;color:#fff;margin-bottom:10px}
+footer a:hover{color:#fff;text-decoration:underline}
+footer .base{grid-column:1/-1;padding-top:22px;border-top:1px solid rgba(255,255,255,.15);font-size:13.5px;opacity:.7;display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+.zap{position:fixed;right:20px;bottom:20px;z-index:70;width:60px;height:60px;background:#25d366;display:grid;place-items:center;box-shadow:0 12px 28px -10px rgba(0,0,0,.5)}
+.zap svg{width:32px;height:32px;color:#fff}
+
+/* CELULAR */
+@media(max-width:900px){
+  body{font-size:17px}
+  #nav nav{display:none}
+  #nav .btn{margin-left:auto;padding:12px 16px;font-size:12px}
+  #nav .lg img{height:40px}#nav.solid .lg img{height:36px}
+  .hero .wrap{flex-direction:column;align-items:center;text-align:center;bottom:40px}
+  .hero .bg{object-position:55% 50%}
+  .hero h1{font-size:clamp(46px,12.6vw,66px);max-width:none}
+  .hero .lado{align-items:center;padding:0}
+  .hero .bts{flex-direction:column;align-items:stretch;width:100%;max-width:340px;gap:10px}
+  .hero .bts .btn{padding:16px 18px}
+  .bora{justify-content:center;margin-top:16px}
+  .tit h2{font-size:clamp(44px,11.5vw,64px)}
+  .quem{padding:90px 0}
+  .quem .wrap{grid-template-columns:1fr;text-align:center}
+  .sol{max-width:400px}
+  .quem h2{font-size:clamp(50px,14vw,72px)}
+  .quem p{margin-left:auto;margin-right:auto}
+  .nums{gap:8px}
+  .num{padding:14px 8px;text-align:center}
+  .num .ic{justify-content:center;margin-bottom:8px}
+  .num .ic .est{font-size:13px;gap:0}
+  .num b{font-size:40px}
+  .num>span{font-size:12.5px}
+  .dest-t{padding:90px 0 50px}
+  .camada .wrap{flex-direction:column;align-items:center;text-align:center;gap:0}
+  .camada h3{font-size:clamp(56px,16vw,88px)}
+  .camada img{object-position:var(--mp,50% 50%)}
+  .camada .lado{max-width:none}
+  .camada p{font-size:16.5px}
+  .todos{padding:70px 0 90px}
+  .todos-h{flex-direction:column;align-items:center;text-align:center;gap:10px}
+  .pgrid,.rgrid{grid-template-columns:repeat(2,1fr);grid-auto-rows:minmax(170px,auto);gap:10px}
+  .pcard{padding:14px 12px}
+  .pcard b{font-size:24px}
+  .g b{font-size:40px!important}
+  .dia{border-radius:28px 28px 0 0;margin-top:-28px;padding:90px 0}
+  .linha .eixo{left:16px}
+  .passo{grid-template-columns:1fr;gap:20px;padding-left:44px}
+  .passo .ponto{left:16px;top:22px}
+  .passo:nth-child(odd of .passo) .img{order:0}
+  .passo:nth-child(odd of .passo) .tx{text-align:left;justify-self:start}
+  .passo:nth-child(odd of .passo) .tx p{margin-left:0}
+  .passo .tx b{font-size:52px}
+  .pas{padding:90px 0}
+  .faixa{height:auto;min-height:260px;padding:26px 22px 86px;align-items:flex-start}
+  .faixa .mk{max-width:100%}
+  .faixa .ir{left:22px;right:auto}
+  .rst{padding-bottom:90px}
+  .rcard{padding:16px 14px}
+  .rcard b{font-size:24px}
+  .rcard small{font-size:10.5px;letter-spacing:.12em}
+  .rcard.cta{padding:24px 20px}
+  .res{padding:0 0 70px;background:#fff;color:var(--tinta)}
+  .res-t .k{color:var(--brasa)}
+  .res-t>p{color:var(--muted)}
+  .orc{box-shadow:0 0 0 1px var(--linha)}
+  .res-img{position:relative;height:60vw;min-height:240px;object-position:50% 50%}
+  .res::before{background:linear-gradient(180deg,rgba(255,255,255,0) 0,rgba(255,255,255,0) 26%,#fff 38%)}
+  .res-t{margin:0 auto;text-align:center;padding-top:20px}
+  .res-t>p{margin:0 auto 26px}
+  .res-t h2{font-size:clamp(50px,14vw,72px)}
+  .orc{grid-template-columns:minmax(0,1fr);padding:20px;text-align:left}
+  .res-t{width:100%}
+  .aval{border-radius:28px 28px 0 0;margin-top:-28px;padding:90px 0}
+  .aval-h{flex-direction:column;align-items:center;text-align:center}
+  .aval h2{font-size:clamp(48px,13vw,68px)}
+  .mural{columns:1}
+  .final .cta{min-height:80vh;align-items:center;text-align:center;padding:120px 0 50px}
+  .final h2{font-size:clamp(60px,17vw,92px)}
+  footer{grid-template-columns:1fr;text-align:center;justify-items:center;gap:26px}
+  footer>*{min-width:0;max-width:100%}
+  footer .base{flex-direction:column;align-items:center;gap:6px;text-align:center}
+}
+@media(min-width:901px) and (max-width:1150px){.mural{columns:2}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <symbol id="wa" viewBox="0 0 32 32"><path fill="currentColor" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2c2 1.1 4.3 1.7 6.6 1.7 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2.1 0-4.1-.6-5.8-1.7l-.4-.3-3.8 1.2 1.2-3.7-.3-.4c-1.2-1.8-1.8-3.8-1.8-5.9C5.1 10 10 5.2 16 5.2S26.9 10 26.9 15.8 22 26.4 16 26.4zm6-7.9c-.3-.2-1.9-1-2.2-1.1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.4.3-.6.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8 0 1.6 1.2 3.2 1.4 3.4.2.2 2.3 3.6 5.7 4.9 2.8 1.1 3.4.9 4 .8.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.1-.3-.2-.6-.4z"/></symbol>
+  <symbol id="g" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.4-.4-3.5z"/><path fill="#FF3D00" d="m6.3 14.7 6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 7.9 3.1l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.3-.1-2.4-.4-3.5z"/></symbol>
+</svg>
+
+<header id="nav">
+  <div class="wrap">
+    <a class="lg" href="#topo" aria-label="Transfer Patacho"><span class="lgt">Transfer<b>Patacho</b></span></a>
+    <nav><a href="#quem">Quem somos</a><a href="#servicos">Serviços</a><a href="#roteiros">Destinos</a><a href="#resorts">Resorts</a></nav>
+    <a class="btn" href="#reservar">Pedir orçamento</a>
+  </div>
+</header>
+
+<section class="hero" id="topo">
+  <picture>
+    <img decoding="async" class="bg" id="heroImg" fetchpriority="high" src="capa.jpg" alt="Mar azul de Alagoas visto de cima">
+  </picture>
+  <div class="wrap">
+    <div class="esq"><h1 class="split" id="heroTit">Seu destino começa <em>aqui.</em></h1>
+    <div class="bora h-fade">Do aeroporto pro <span class="slot" id="slot"><b>Patacho</b><b>Milagres</b><b>Japaratinga</b><b>Maragogi</b><b>sua pousada</b><b>Patacho</b></span></div></div>
+    <div class="lado">
+      <div class="bts h-fade"><a class="btn" href="#reservar">Pedir orçamento</a><a class="btn lin" href="#reservar" data-pre="Transfer aeroporto ⇄ pousada">Transfer aeroporto ⇄ pousada</a></div>
+      <div class="g5 h-fade"><svg><use href="#g"/></svg><b>4,7</b><span class="est brilho"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></span><span>no Google</span></div>
+    </div>
+  </div>
+  <div class="sombra" id="heroSombra"></div>
+</section>
+
+<section class="quem" id="quem">
+  <div class="wrap">
+    <div class="sol">
+      <div class="disco" id="disco"></div>
+      <div class="foto"><img loading="lazy" decoding="async" src="pt-carro.jpg" alt="Carro da Transfer Patacho" style="object-position:55% 60%"></div>
+      <div class="tag">Patacho · Porto de Pedras<small>Transfer e táxi</small></div>
+    </div>
+    <div>
+      <span class="k rv">Quem te leva</span>
+      <h2 class="split">Prazer, somos a <em>Transfer Patacho.</em></h2>
+      <p class="rv">A nossa base é o Patacho, em Porto de Pedras, no meio da Rota Ecológica dos Milagres. A gente busca você no aeroporto de Maceió ou de Recife e leva direto pra sua pousada, só com o seu grupo.</p>
+      <p class="rv">Carro confortável, motorista educado e a volta pro aeroporto já combinada. E quem já está por aqui a gente leva pra conhecer os pontos turísticos da região.</p>
+      <div class="nums rv">
+        <div class="num"><div class="ic"><svg><use href="#g"/></svg></div><b>4,7</b><span>de nota no Google</span></div>
+        <div class="num gg"><div class="ic"><span class="est brilho"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></span></div><b>+7</b><span>anos levando turistas</span></div>
+        <div class="num wa"><div class="ic"><svg><use href="#wa"/></svg></div><b>2</b><span>aeroportos, Maceió e Recife</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="pas" id="servicos">
+  <div class="wrap">
+    <div class="tit"><span class="k rv">Serviços</span><h2 class="split">Do que você <em>precisa?</em></h2></div>
+    <div class="faixas">
+      <a class="faixa rv" href="#reservar" data-pre="Transfer aeroporto ⇄ pousada"><img loading="lazy" decoding="async" src="pt-chegada.jpg" alt="Clientes da Transfer Patacho chegando no aeroporto com as malas" style="object-position:50% 35%"><span class="mk"><small>Transfer privativo</small><b>Do aeroporto pra sua pousada e de volta</b><em>A gente te espera no desembarque em Maceió ou Recife e leva direto pro Patacho, Milagres ou Japaratinga.</em></span><span class="ir">Quero o transfer →</span></a>
+      <a class="faixa rv" href="#reservar" data-pre="Passeios e táxi na região"><img loading="lazy" decoding="async" src="pt-piscinas.jpg" alt="Piscinas naturais na Rota Ecológica dos Milagres" style="object-position:50% 50%"><span class="mk"><small>Táxi e passeios</small><b>Conheça a Rota Ecológica sem pressa</b><em>Piscinas naturais, praias e o peixe-boi, com motorista que conhece cada canto da região.</em></span><span class="ir">Quero passear →</span></a>
+    </div>
+  </div>
+</section></section>
+
+<section class="dest" id="roteiros">
+  <div class="dest-t wrap"><div class="tit"><span class="k rv">Destinos</span><h2 class="split">Pra onde a gente <em>te leva.</em></h2><p class="rv">Do aeroporto pras praias mais bonitas do litoral norte de Alagoas, no carro só do seu grupo.</p></div></div>
+  <div class="palco" id="palco"></div>
+  <div class="todos wrap">
+    <div class="todos-h"><div><span class="k rv">Todos os destinos</span><h3 class="split">Escolha o <em>seu destino</em></h3></div><p class="rv">Toca no destino e ele já entra no seu orçamento.</p></div>
+    <div class="pgrid" id="pgrid"></div>
+  </div>
+</section>
+
+<section class="dia" id="dia">
+  <div class="wrap">
+    <div class="tit"><span class="k rv">Como funciona</span><h2 class="split">Do voo ao <em>destino</em></h2><p class="rv">Sem fila de táxi e sem procurar carro no aeroporto. Tudo combinado antes de você embarcar.</p></div>
+    <div class="linha">
+      <div class="eixo"><i id="eixo"></i></div>
+      <div class="passo"><span class="ponto"></span><div class="img"><img loading="lazy" decoding="async" src="praia-coqueiros.jpg" alt="Praia de Alagoas com coqueiros" style="object-position:50% 50%"></div><div class="tx"><b>01</b><h3>Você pede o orçamento</h3><p>Manda o destino, a data e quantas pessoas pelo WhatsApp. A resposta vem com o valor certinho.</p></div></div>
+      <div class="passo"><span class="ponto"></span><div class="img"><img loading="lazy" decoding="async" src="pt-aeroporto.jpg" alt="Carro da Transfer Patacho no aeroporto" style="object-position:50% 55%"></div><div class="tx"><b>02</b><h3>A gente te espera no desembarque</h3><p>O carro já está no aeroporto de Maceió ou de Recife quando o seu voo pousa.</p></div></div>
+      <div class="passo"><span class="ponto"></span><div class="img"><img loading="lazy" decoding="async" src="pt-carro2.jpg" alt="Carro da Transfer Patacho" style="object-position:50% 60%"></div><div class="tx"><b>03</b><h3>Malas no carro, ar gelado</h3><p>Espaço pras malas, carro limpo e só o seu grupo dentro. Você só senta e relaxa.</p></div></div>
+      <div class="passo"><span class="ponto"></span><div class="img"><img loading="lazy" decoding="async" src="estrada.jpg" alt="Estrada entre coqueiros no litoral de Alagoas" style="object-position:50% 50%"></div><div class="tx"><b>04</b><h3>Direto pro seu destino</h3><p>Pousada no Patacho, em Milagres ou resort em Maragogi. A gente conhece cada caminho.</p></div></div>
+      <div class="passo"><span class="ponto"></span><div class="img"><img loading="lazy" decoding="async" src="d-orla.jpg" alt="Praia em Maceió" style="object-position:40% 60%"></div><div class="tx"><b>05</b><h3>E a volta já fica combinada</h3><p>No dia de ir embora, a gente busca na pousada no horário certo pro seu voo.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="rst" id="resorts">
+  <div class="wrap">
+    <div class="tit"><span class="k rv">Transfer</span><h2 class="split">Os resorts que a gente <em>atende</em></h2><p class="rv">Do aeroporto direto pra recepção do seu resort, no carro só do seu grupo.</p></div>
+    <div class="rgrid" id="rgrid"></div>
+  </div>
+</section>
+
+<section class="res" id="reservar">
+  <img loading="lazy" decoding="async" class="res-img" src="d-milagres.jpg" alt="">
+  <div class="wrap">
+  <div class="res-t">
+    <span class="k rv">Orçamento sem compromisso</span>
+    <h2 class="split">Monte seu orçamento</h2>
+    <p class="rv">Conta pra onde quer ir, quando chega e quantas pessoas vão. A Transfer Patacho responde com o valor certinho pro seu grupo.</p>
+    <form class="orc rv" id="orc" novalidate>
+      <label class="full">Pra onde você quer ir?<select name="dest"><option value="" disabled selected>Escolha uma opção</option><option value="Transfer aeroporto ⇄ pousada">Transfer aeroporto ⇄ pousada (ida e volta)</option></select><span class="err"></span></label>
+      <label class="full" id="orcOutro" hidden>Qual lugar?<input name="outro" type="text" maxlength="60" placeholder="Ex.: Porto de Pedras"><span class="err"></span></label>
+      <div class="campo"><span class="lbl">Chegada em Alagoas</span><button type="button" class="dt vazio" data-k="ida">Escolher data</button><span class="err"></span></div>
+      <div class="campo"><span class="lbl">Volta pra casa</span><button type="button" class="dt vazio" data-k="volta">Escolher data</button><em class="dica">Opcional, deixe em branco se não sabe</em><span class="err"></span></div>
+      <label>Quantas pessoas?<select name="pes"><option value="" disabled selected>Escolha</option><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>10</option><option>11</option><option>12</option><option>Mais de 12</option></select><span class="err"></span></label>
+      <label>Quem vai no grupo?<select name="grupo"><option value="">Opcional</option><option>Casal</option><option>Família com crianças</option><option>Grupo da melhor idade</option><option>Viagem a trabalho</option><option>Amigos</option><option>Viajo sozinho(a)</option></select></label>
+      <label class="full">Nome do hotel ou pousada<input name="hotel" type="text" maxlength="80" placeholder="Ex.: Pousada no Patacho"><em class="dica">Opcional, onde você vai se hospedar</em></label>
+      <button class="btn full" type="submit"><svg><use href="#wa"/></svg>Pedir orçamento no WhatsApp</button>
+      <small class="full">A mensagem já chega pronta no WhatsApp da Transfer Patacho.</small>
+    </form>
+    <div class="cal-bg" id="cal" hidden data-lenis-prevent><div class="cal" role="dialog" aria-modal="true" aria-label="Escolher data">
+      <p class="cal-t"></p>
+      <div class="cal-h"><button type="button" class="cal-p" aria-label="Mês anterior">‹</button><b></b><button type="button" class="cal-n" aria-label="Próximo mês">›</button></div>
+      <div class="cal-w"><span>D</span><span>S</span><span>T</span><span>Q</span><span>Q</span><span>S</span><span>S</span></div>
+      <div class="cal-g"></div>
+      <div class="cal-f"><button type="button" class="cal-so">Ainda não sei</button><button type="button" class="cal-x">Fechar</button></div>
+    </div></div>
+  </div>
+  </div>
+</section>
+
+<section class="aval" id="avaliacoes">
+  <div class="wrap">
+    <div class="aval-h">
+      <div><span class="k rv">Avaliações</span><h2 class="split">Quem foi, recomenda.</h2></div>
+      <div class="nota rv"><svg><use href="#g"/></svg><b>4,7</b><div><span class="est brilho"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></span><small>12 avaliações no Google</small></div></div>
+    </div>
+    <div class="mural"><div class="dep rv"><div class="dep-top"><span class="est"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></span><svg><use href="#g"/></svg></div><p>Viagem tranquila, segura, em carro extremamente confortável, motorista educado e gente boa demais! Já usei o Transfer Patacho de Recife a Milagres, de Natal a Milagres e também pra conhecer todos os pontos turísticos da região.</p><div class="quem-av"><span class="av" style="background:#1d6fd6">A</span><div><b>Ana Prado</b><small>Google</small></div></div></div><figure class="mfoto rv"><img loading="lazy" src="pt-jangada.jpg" alt="Passeio de jangada nas piscinas naturais"><figcaption>Piscinas naturais</figcaption></figure><div class="dep rv"><div class="dep-top"><span class="est"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></span><svg><use href="#g"/></svg></div><p>Excelente. O Beto é muito gentil, educado e atencioso. Sempre tivemos um excelente atendimento por ele e pelo Bruno.</p><div class="quem-av"><span class="av" style="background:#c8202a">M</span><div><b>Miriam Guimarães</b><small>Google</small></div></div></div><div class="dep rv"><div class="dep-top"><span class="est"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></span><svg><use href="#g"/></svg></div><p>Melhor transfer da região. 100% seguro, responsável e amigável! Serviço maravilhoso! Recomendo muito!</p><div class="quem-av"><span class="av" style="background:#16171b">D</span><div><b>Daniela Justus</b><small>Google</small></div></div></div><figure class="mfoto rv"><img loading="lazy" src="pt-farol.jpg" alt="Clientes no farol da região"><figcaption>Passeio pela região</figcaption></figure><div class="dep rv"><div class="dep-top"><span class="est"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></span><svg><use href="#g"/></svg></div><p>Serviço 5 estrelas. Todo o cuidado, trato e disponibilidade muito bom.</p><div class="quem-av"><span class="av" style="background:#1d6fd6">S</span><div><b>Sérgio Peixoto</b><small>Google</small></div></div></div><div class="dep rv"><div class="dep-top"><span class="est"><i>★</i><i>★</i><i>★</i><i>★</i><i>★</i></span><svg><use href="#g"/></svg></div><p>Segurança e tranquilidade!! Experiência que você precisa viver!</p><div class="quem-av"><span class="av" style="background:#c8202a">C</span><div><b>Crislane Silva</b><small>Google</small></div></div></div></div>
+  </div>
+</section>
+
+<section class="loc" id="local">
+  <div class="wrap">
+    <div class="tit"><span class="k rv">Onde fica</span><h2 class="split">No coração dos <em>Milagres.</em></h2><p class="rv">Praça Nicolau Paes Sarmento, 749, Lages, Porto de Pedras. Pertinho das praias do Patacho e de São Miguel dos Milagres.</p></div>
+    <div class="mapa rv"><iframe src="https://maps.google.com/maps?q=Transfer%20Patacho%2C%20Porto%20de%20Pedras&z=14&output=embed" loading="lazy" title="Mapa da Transfer Patacho"></iframe></div>
+    <div class="loc-b rv"><a class="btn" href="https://www.google.com/maps/search/?api=1&query=Transfer+Patacho+Porto+de+Pedras" target="_blank" rel="noopener">Abrir no Google Maps</a></div>
+  </div>
+</section>
+
+<section class="final" id="contato">
+  <img loading="lazy" decoding="async" class="bg" src="final.jpg" alt="Jangadas no mar de Maceió no fim de tarde">
+  <div class="wrap">
+    <div class="cta">
+      <span class="k rv">Alta temporada chegando</span>
+      <h2 class="split">Alagoas tá te <em>esperando.</em></h2>
+      <p class="rv">Dezembro e janeiro lotam rápido. Garanta seu transfer antes de embarcar.</p>
+      <a class="btn rv" href="#reservar">Pedir orçamento</a>
+    </div>
+    <footer>
+      <div><span class="lgt">Transfer<b>Patacho</b></span><p>Transfer e táxi em Porto de Pedras, no Patacho e em toda a Rota Ecológica dos Milagres. Buscamos você no aeroporto de Maceió ou de Recife.</p></div>
+      <div><h4>Fale com a gente</h4><p><a href="https://wa.me/5582998424211" target="_blank" rel="noopener">WhatsApp (82) 99842-4211</a><br>Praça Nicolau Paes Sarmento, 749<br>Lages · Porto de Pedras · AL</p></div>
+      <div><h4>Destinos</h4><p>Patacho · Milagres · Japaratinga<br>Porto de Pedras · Maragogi<br>Aeroportos de Maceió e Recife</p></div>
+      <div class="base"><span>Transfer Patacho · 2026</span><span>Site feito pela Frattini Labs</span></div>
+    </footer>
+  </div>
+</section>
+
+<a class="zap" href="https://wa.me/5582998424211?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Transfer%20Patacho." target="_blank" rel="noopener" aria-label="WhatsApp da Transfer Patacho"><svg><use href="#wa"/></svg></a>
+
+<script src="gsap.min.js"></script>
+<script src="ScrollTrigger.min.js"></script>
+<script src="lenis.min.js"></script>
+<script>
+const WA='5582998424211';
+// d = foto deitada (computador), m = foto em pé (celular)
+const ROTEIROS=[
+  {id:'São Miguel dos Milagres',d:'d-milagres.jpg',m:'d-milagres.jpg',mp:'62% 50%',reg:'Rota Ecológica',t:'Milagres',tx:'Piscinas naturais, coqueiral sem fim e as pousadas mais charmosas de Alagoas.'},
+  {id:'Maragogi',d:'d-maragogi.jpg',m:'maragogi.jpg',reg:'Costa dos Corais',t:'Maragogi',tx:'As piscinas naturais mais famosas do Brasil. Saindo cedo, você chega na maré baixa.'},
+  {id:'Praia do Gunga',d:'d-gunga.jpg',m:'gunga-mirante.jpg',mp:'50% 60%',reg:'Litoral sul',t:'Gunga',tx:'O mirante sobre o coqueiral e as falésias, com ida e volta no horário que você quiser.'},
+  {id:'Praia do Francês',d:'frances.jpg',m:'frances.jpg',mp:'40% 50%',reg:'Litoral sul · 30 min',t:'Francês',tx:'Mar calmo protegido pelos recifes e barracas pé na areia.'},
+  {id:'Ipioca',d:'d-ipioca.jpg',m:'ipioca.jpg',reg:'Litoral norte de Maceió',t:'Ipioca',tx:'Beach clubs pé na areia e os resorts do litoral norte de Maceió.'},
+  {id:'Hotel em Maceió',d:'d-orla.jpg',m:'orla-maceio.jpg',mp:'50% 50%',reg:'Pajuçara · Ponta Verde · Jatiúca',t:'Maceió',tx:'Do desembarque direto pro seu hotel na orla de Maceió.'},
+  {id:'Ilha da Crôa',d:'d-croa.jpg',m:'croa.jpg',reg:'Barra de Santo Antônio',t:'Ilha da Crôa',tx:'Banco de areia, mar cristalino e os beach clubs da Barra de Santo Antônio.'},
+  {id:'Foz do São Francisco',d:'d-foz.jpg',m:'foz.jpg',mp:'50% 60%',reg:'Piaçabuçu',t:'Foz do São Francisco',tx:'Dunas, rio e mar se encontrando num cenário que parece outro país.'},
+  {id:'Cânions do São Francisco',d:'d-canions.jpg',m:'canions.jpg',reg:'Piranhas · sertão',t:'Cânions do Xingó',tx:'Paredões de pedra nas águas verdes do Velho Chico.'}
+];
+const RESORTS=[
+  ['rs-vilagale.jpg','Barra de Santo Antônio','Vila Galé Alagoas'],
+  ['rs-salmaragogi.jpg','Maragogi','Salinas Maragogi'],
+  ['rs-grandoca.jpg','Maragogi','Grand Oca Maragogi'],
+  ['rs-japaratinga.jpg','Japaratinga','Japaratinga Lounge'],
+  ['rs-maceiomar.jpg','Ipioca · Maceió','Maceió Mar Resort'],
+  ['rs-salmaceio.jpg','Ipioca · Maceió','Salinas Maceió'],
+  ['rs-ipioca.jpg','Ipioca · Maceió','Ipioca Beach Resort']
+];
+const OUTROS=['Passeios e táxi na região','Outro lugar'];
+const orc=document.getElementById('orc'),palco=document.getElementById('palco'),pgrid=document.getElementById('pgrid'),rgrid=document.getElementById('rgrid');
+const DESTAQUES=['Maragogi','São Miguel dos Milagres','Praia do Gunga','Foz do São Francisco'];
+const DQ=ROTEIROS.filter(r=>DESTAQUES.includes(r.id));
+DQ.forEach((r,i)=>palco.insertAdjacentHTML('beforeend',`<div class="camada"><picture><source media="(max-width:900px)" srcset="${r.m}"><img loading="lazy" decoding="async" src="${r.d}" alt="${r.t}"${r.mp?` style="--mp:${r.mp}"`:''}></picture><div class="wrap"><div class="nome"><span class="n">${String(i+1).padStart(2,'0')} / ${String(DQ.length).padStart(2,'0')}</span><small>${r.reg}</small><h3>${r.t}</h3></div><div class="lado"><p>${r.tx}</p><a class="btn" href="#reservar" data-pre="${r.id}">Quero esse</a></div></div><div class="esc"></div></div>`));
+const TAM=['g','t','','','','','w','t','g'];
+ROTEIROS.forEach((r,i)=>{
+  const tm=TAM[i]||'',deitada=tm==='g'||tm==='w';
+  pgrid.insertAdjacentHTML('beforeend',`<a class="pcard rv ${tm}" href="#reservar" data-pre="${r.id}"><img decoding="async" src="${deitada?r.d:r.m}" alt="${r.t}" loading="lazy" style="object-position:${deitada?'50% 50%':(r.mp||'50% 50%')}"><span><small>${r.reg}</small><b>${r.t}</b><em>Quero esse →</em></span></a>`);
+  orc.dest.insertAdjacentHTML('beforeend',`<option value="${r.id}">${r.t}</option>`);
+});
+pgrid.insertAdjacentHTML('beforeend',`<a class="pcard cta rv t" href="#reservar" data-pre="Outro lugar"><span><small>Outro destino?</small><b>A gente leva pra qualquer lugar de Alagoas</b></span><p>Recife, Porto de Galinhas, interior… é só dizer pra onde e quando.</p><span><em>Pedir orçamento →</em></span></a>`);
+OUTROS.forEach(o=>orc.dest.insertAdjacentHTML('beforeend',`<option>${o}</option>`));
+const TR=['g','t','','','','w',''];
+RESORTS.forEach(([img,loc,n],i)=>rgrid.insertAdjacentHTML('beforeend',`<a class="rcard rv ${TR[i]||''}" href="#reservar" data-pre="Transfer aeroporto ⇄ pousada" data-hotel="${n}"><img decoding="async" src="${img}" alt="${n}" loading="lazy"><span><small>${loc}</small><b>${n}</b><em>Cotar transfer →</em></span></a>`));
+rgrid.insertAdjacentHTML('beforeend',`<a class="rcard cta rv f" href="#reservar" data-pre="Transfer aeroporto ⇄ pousada"><span><small style="color:#fff">Outro hotel?</small><b>Seu hotel não tá na lista?</b></span><p>A gente leva pra qualquer hotel ou pousada de Alagoas.</p><span><em>Cotar meu transfer →</em></span></a>`);
+
+/* formulário com calendário (mesmo modelo do site do Agnaldo) */
+(function(){
+var f=orc,cal=document.getElementById('cal'),g=cal.querySelector('.cal-g'),tit=cal.querySelector('.cal-h b'),
+MES=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+SEM=['domingo','segunda','terça','quarta','quinta','sexta','sábado'],
+st={ida:null,volta:null},modo='ida',vis;
+function hoje(){var d=new Date();return new Date(d.getFullYear(),d.getMonth(),d.getDate())}
+function limite(){var h=hoje();return new Date(h.getFullYear(),h.getMonth()+18,h.getDate())}
+function br(d){return ('0'+d.getDate()).slice(-2)+'/'+('0'+(d.getMonth()+1)).slice(-2)+'/'+d.getFullYear()}
+function mesmo(a,b){return a&&b&&a.getTime()===b.getTime()}
+function minDe(k){return k==='volta'&&st.ida?st.ida:hoje()}
+function campo(el){return el.closest('label,.campo')}
+function erro(el,msg){var c=campo(el),e=c.querySelector('.err');if(!e)return;e.textContent=msg||'';c.classList.toggle('inv',!!msg)}
+function bt(k){return f.querySelector('.dt[data-k="'+k+'"]')}
+function pinta(){['ida','volta'].forEach(function(k){var b=bt(k),d=st[k];b.textContent=d?br(d)+' ('+SEM[d.getDay()]+')':'Escolher data';b.classList.toggle('vazio',!d)})}
+function desenha(){var mn=minDe(modo),mx=limite(),ano=vis.getFullYear(),m=vis.getMonth(),ini=new Date(ano,m,1).getDay(),tot=new Date(ano,m+1,0).getDate(),h='';
+tit.textContent=MES[m]+' '+ano;
+cal.querySelector('.cal-p').disabled=(ano*12+m)<=(mn.getFullYear()*12+mn.getMonth());
+cal.querySelector('.cal-n').disabled=(ano*12+m)>=(mx.getFullYear()*12+mx.getMonth());
+for(var i=0;i<ini;i++)h+='<span></span>';
+for(var d=1;d<=tot;d++){var dt=new Date(ano,m,d),off=dt<mn||dt>mx,c='';
+if(mesmo(dt,st.ida))c+=' ida';if(mesmo(dt,st.volta))c+=' volta';
+if(st.ida&&st.volta&&dt>st.ida&&dt<st.volta)c+=' meio';if(mesmo(dt,hoje()))c+=' hj';
+h+='<button type="button" data-d="'+d+'" class="'+c+'"'+(off?' disabled':'')+'>'+d+'</button>'}
+g.innerHTML=h}
+function abre(k){modo=k;var base=st[k]||minDe(k);vis=new Date(base.getFullYear(),base.getMonth(),1);
+cal.querySelector('.cal-t').textContent=k==='ida'?'Chegada em Alagoas':'Volta pra casa';
+cal.querySelector('.cal-so').hidden=k!=='volta';desenha();cal.hidden=false;document.documentElement.classList.add('cal-on');if(window.lenis)lenis.stop();
+var b=g.querySelector('button.'+k)||g.querySelector('button:not([disabled])');if(b)b.focus()}
+function fecha(){cal.hidden=true;document.documentElement.classList.remove('cal-on');if(window.lenis)lenis.start();bt(modo).focus()}
+f.querySelectorAll('.dt').forEach(function(b){b.addEventListener('click',function(){abre(b.dataset.k)})});
+cal.querySelector('.cal-p').onclick=function(){vis=new Date(vis.getFullYear(),vis.getMonth()-1,1);desenha()};
+cal.querySelector('.cal-n').onclick=function(){vis=new Date(vis.getFullYear(),vis.getMonth()+1,1);desenha()};
+cal.querySelector('.cal-x').onclick=fecha;
+cal.querySelector('.cal-so').onclick=function(){st.volta=null;pinta();erro(bt('volta'));fecha()};
+cal.addEventListener('click',function(e){if(e.target===cal)fecha()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!cal.hidden)fecha()});
+g.addEventListener('click',function(e){var b=e.target.closest('button');if(!b||b.disabled)return;
+var d=new Date(vis.getFullYear(),vis.getMonth(),+b.dataset.d);st[modo]=d;
+if(modo==='ida'){erro(bt('ida'));if(st.volta&&st.volta<d){st.volta=null;erro(bt('volta'),'A volta era antes da nova chegada, escolha de novo')}}else erro(bt('volta'));
+pinta();fecha()});
+f.dest.addEventListener('change',function(){var o=this.value==='Outro lugar';document.getElementById('orcOutro').hidden=!o;erro(this);if(o)f.outro.focus()});
+f.outro.addEventListener('input',function(){erro(this)});
+f.pes.addEventListener('change',function(){erro(this)});
+f.addEventListener('submit',function(e){e.preventDefault();var h=hoje(),primeiro=null;
+function falha(el,msg){erro(el,msg);if(!primeiro)primeiro=el}
+var dest=f.dest.value,outro=f.outro.value.trim();
+if(!dest)falha(f.dest,'Escolha pra onde quer ir');
+else if(dest==='Outro lugar'&&!outro)falha(f.outro,'Escreva qual é o lugar');
+if(!st.ida)falha(bt('ida'),'Escolha a data de chegada');
+else if(st.ida<h){st.ida=null;pinta();falha(bt('ida'),'Essa data já passou, escolha outra')}
+if(st.volta&&st.ida&&st.volta<st.ida){st.volta=null;pinta();falha(bt('volta'),'A volta não pode ser antes da chegada')}
+if(!f.pes.value)falha(f.pes,'Escolha quantas pessoas');
+if(primeiro){campo(primeiro).scrollIntoView({behavior:'smooth',block:'center'});return}
+var vt=st.volta?'\nVolta: '+br(st.volta)+' ('+SEM[st.volta.getDay()]+')\nTotal: '+(Math.round((st.volta-st.ida)/864e5)+1)+(mesmo(st.volta,st.ida)?' dia':' dias em Alagoas'):'',
+hotel=f.hotel.value.trim(),grupo=f.grupo.value,
+m='Olá! Vim pelo site da Transfer Patacho e quero um orçamento de transfer.\n\nQuero: '+(dest==='Outro lugar'?outro:dest)+'\nChegada: '+br(st.ida)+' ('+SEM[st.ida.getDay()]+')'+vt+'\nPessoas: '+f.pes.value+(grupo?'\nGrupo: '+grupo:'')+(hotel?'\nHospedagem: '+hotel:''),
+url='https://wa.me/'+WA+'?text='+encodeURIComponent(m),w=window.open(url,'_blank');
+if(!w)location.href=url});
+pinta()})();
+
+/* "Quero esse", serviços e resorts escolhem o passeio (e o hotel) no formulário */
+document.querySelectorAll('[data-pre]').forEach(b=>b.addEventListener('click',e=>{
+  e.preventDefault();orc.dest.value=b.dataset.pre;orc.dest.dispatchEvent(new Event('change'));
+  if(b.dataset.hotel)orc.hotel.value=b.dataset.hotel;
+  const t=document.getElementById('reservar');window.lenis?lenis.scrollTo(t,{offset:-60}):t.scrollIntoView({behavior:'smooth'});
+}));
+
+/* títulos: palavras sobem com leve rotação */
+document.querySelectorAll('.split').forEach(el=>{
+  const walk=n=>{[...n.childNodes].forEach(c=>{
+    if(c.nodeType===3){const fr=document.createDocumentFragment();c.textContent.split(/(\s+)/).forEach(p=>{if(!p)return;if(/^\s+$/.test(p)){fr.appendChild(document.createTextNode(' '));return}const w=document.createElement('span');w.className='w';const s=document.createElement('span');s.textContent=p;w.appendChild(s);fr.appendChild(w)});c.replaceWith(fr)}
+    else if(c.nodeType===1)walk(c)})};
+  walk(el);
+});
+
+gsap.registerPlugin(ScrollTrigger);
+const REC=/[?&]rec/.test(location.search);
+window.lenis=null;
+if(!REC&&window.Lenis){
+  window.lenis=new Lenis({lerp:.09});lenis.on('scroll',ScrollTrigger.update);
+  gsap.ticker.add(t=>lenis.raf(t*1000));gsap.ticker.lagSmoothing(0);
+  document.querySelectorAll('a[href^="#"]:not([data-pre])').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();lenis.scrollTo(a.getAttribute('href'),{offset:a.getAttribute('href')==='#reservar'?-60:0})}));
+}
+if(REC){gsap.ticker.lagSmoothing(0);}
+
+const nav=document.getElementById('nav');
+ScrollTrigger.create({start:0,end:'max',onUpdate:s=>nav.classList.toggle('solid',s.scroll()>innerHeight*.85)});
+
+const SUBIR={yPercent:100,opacity:0,rotate:2.5,duration:1.6,ease:'power4.out',stagger:.045};
+// capa: foto só com fade, título sobe palavra por palavra
+const hero=gsap.timeline({delay:.1});
+hero.from('#heroImg',{opacity:0,duration:1.4,ease:'power1.out'})
+    .from('#heroTit .w>span',SUBIR,.3)
+    .from('.h-fade',{opacity:0,duration:1.5,ease:'power2.out',stagger:.15},1);
+if(REC){hero.pause(0);window.__hero=hero;}
+// estrelas brilhando: um brilho passa de estrela em estrela
+gsap.utils.toArray('.est.brilho').forEach(e=>{
+  gsap.timeline({repeat:-1,repeatDelay:1.6}).to(e.querySelectorAll('i'),{keyframes:[{scale:1.35,color:'#fff3b0',textShadow:'0 0 14px rgba(255,200,40,1)',duration:.22},{scale:1,color:'#ffc21a',textShadow:'0 0 0px rgba(255,200,40,0)',duration:.4}],stagger:.12,ease:'power1.inOut'});
+});
+// títulos, textos e fotos
+gsap.utils.toArray('.split').forEach(el=>{if(el.id==='heroTit')return;
+  gsap.from(el.querySelectorAll('.w>span'),{...SUBIR,scrollTrigger:{trigger:el,start:'top 86%'}})});
+gsap.utils.toArray('.rv').forEach(el=>gsap.from(el,{opacity:0,duration:1.5,ease:'power2.out',scrollTrigger:{trigger:el,start:'top 92%'}}));
+// quem somos: o sol cresce e gira de leve enquanto a seção entra
+gsap.fromTo('#disco',{scale:.6,rotate:-30},{scale:1,rotate:0,ease:'none',scrollTrigger:{trigger:'.quem',start:'top 90%',end:'center center',scrub:true}});
+gsap.from('.sol .foto,.sol .tag',{opacity:0,duration:1.5,stagger:.2,ease:'power2.out',scrollTrigger:{trigger:'.sol',start:'top 80%'}});
+// passeios: o palco fica preso e cada foto cobre a anterior de baixo pra cima, rápido
+const CM=gsap.utils.toArray('.camada');
+CM.slice(1).forEach(c=>gsap.set(c,{clipPath:'inset(100% 0% 0% 0%)'}));
+const tlp=gsap.timeline({scrollTrigger:{trigger:'#palco',start:'top top',end:()=>'+='+(CM.length-1)*innerHeight*.75,pin:true,scrub:REC?true:.8,anticipatePin:1,invalidateOnRefresh:true}});
+CM.slice(1).forEach((c,i)=>{
+  tlp.to(c,{clipPath:'inset(0% 0% 0% 0%)',ease:'none',duration:1},i)
+     .to(CM[i].querySelector('.esc'),{opacity:.6,ease:'none',duration:1},i)
+     .fromTo(c.querySelectorAll('.n,small,h3,p,.btn'),{opacity:0,y:40},{opacity:1,y:0,stagger:.05,duration:.5,ease:'power2.out'},i+.45);
+});
+gsap.from(CM[0].querySelectorAll('.n,small,h3,p,.btn'),{opacity:0,y:30,duration:1.3,stagger:.08,ease:'power3.out',scrollTrigger:{trigger:'#palco',start:'top 60%'}});
+// capa: "Bora pro" troca o destino sozinho
+const slots=gsap.utils.toArray('#slot b');gsap.set(slots,{yPercent:100});gsap.set(slots[0],{yPercent:0});
+const sl=gsap.timeline({repeat:-1,delay:2.2});
+for(let i=0;i<slots.length-1;i++){sl.to(slots[i],{yPercent:-100,duration:.55,ease:'power3.inOut'},'+=1.4').fromTo(slots[i+1],{yPercent:100},{yPercent:0,duration:.55,ease:'power3.inOut'},'<');}
+sl.set(slots,{yPercent:100}).set(slots[0],{yPercent:0});
+// como funciona: a linha se desenha na rolagem
+gsap.to('#eixo',{scaleY:1,ease:'none',scrollTrigger:{trigger:'.linha',start:'top 65%',end:'bottom 65%',scrub:true}});
+gsap.utils.toArray('.passo').forEach(p=>{
+  gsap.from(p.querySelector('.img'),{opacity:0,duration:1.5,ease:'power2.out',scrollTrigger:{trigger:p,start:'top 82%'}});
+  gsap.from(p.querySelector('.tx'),{opacity:0,y:30,duration:1.2,ease:'power3.out',delay:.15,scrollTrigger:{trigger:p,start:'top 82%'}});
+  gsap.from(p.querySelector('.ponto'),{scale:0,duration:.6,ease:'back.out(3)',scrollTrigger:{trigger:p,start:'top 65%'}});
+});
+
+const mm=gsap.matchMedia();
+mm.add('(min-width:901px)',()=>{
+  // capa fica parada e escurece enquanto a seção quem somos sobe por cima como um cartão que se abre
+  ScrollTrigger.create({trigger:'.hero',start:'top top',end:'bottom top',pin:true,pinSpacing:false});
+  gsap.to('#heroSombra',{opacity:.75,ease:'none',scrollTrigger:{trigger:'.quem',start:'top bottom',end:'top top',scrub:true}});
+  gsap.fromTo('.quem',{clipPath:'inset(6% 6% 0% 6% round 36px)'},{clipPath:'inset(0% 0% 0% 0% round 0px)',ease:'none',scrollTrigger:{trigger:'.quem',start:'top bottom',end:'top top',scrub:true}});
+  // orçamento abre como um cartão por cima dos resorts
+  gsap.fromTo('#reservar',{clipPath:'inset(7% 6% 0% 6%)'},{clipPath:'inset(0% 0% 0% 0%)',ease:'none',scrollTrigger:{trigger:'#reservar',start:'top 95%',end:'top 25%',scrub:REC?true:1}});
+});
+window.addEventListener('load',()=>ScrollTrigger.refresh());
+</script>
+</body>
+</html>
